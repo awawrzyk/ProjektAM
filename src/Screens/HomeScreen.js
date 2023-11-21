@@ -3,14 +3,17 @@ import {Text,Button, SafeAreaView, StyleSheet, View} from 'react-native';
 
 
 
-export default HomeScreen = () =>{
+export default HomeScreen = ({navigation}) =>{
+    const handleCustomers=()=>{
+        navigation.navigate('Customers')
+    }
     return(
         <SafeAreaView style={styles.container}>
             <Text>{'Home screen'}</Text>
             <View style={styles.buttonContainer}>
                 <Button title="Zlecenia" color='#23A403' />
                 <View style={styles.buttonSpacing} />
-                <Button title="Klienci" color='#23A403'/>
+                <Button title="Klienci" color='#23A403' onPress={handleCustomers}/>
                 <View style={styles.buttonSpacing} />
                 <Button title="Asortyment" color='#23A403'/>
                 <View style={styles.buttonSpacing} />
