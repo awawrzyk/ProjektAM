@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './src/Login';
 import HomeScreen from './src/Screens/HomeScreen';
 import CustomersScreen from './src/Screens/CustomersScreen';
+import UsersScreen from './src/Screens/UsersScreen';
 
 export default AppNavigator=()=>{
 
@@ -15,6 +16,7 @@ export default AppNavigator=()=>{
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Customers" component={CustomersScreen} />
+                <Stack.Screen name="Users" component={UsersScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
