@@ -10,11 +10,14 @@ export default HomeScreen = ({navigation}) =>{
     const handleUsers=() =>{
         navigation.navigate('Users')
     }
+    const handleZlecenia=() =>{
+        navigation.navigate('Zlecenia')
+    }
     return(
         <SafeAreaView style={styles.container}>
             <Text>{'Home screen'}</Text>
             <View style={styles.buttonContainer}>
-                <Button title="Zlecenia" color='#23A403' />
+                <Button title="Zlecenia" color='#23A403' onPress={handleZlecenia}/>
                 <View style={styles.buttonSpacing} />
                 <Button title="Klienci" color='#23A403' onPress={handleCustomers}/>
                 <View style={styles.buttonSpacing} />

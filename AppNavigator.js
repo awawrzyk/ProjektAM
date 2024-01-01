@@ -5,6 +5,7 @@ import Login from './src/Login';
 import HomeScreen from './src/Screens/HomeScreen';
 import CustomersScreen from './src/Screens/CustomersScreen';
 import UsersScreen from './src/Screens/UsersScreen';
+import ZleceniaScreen from "./src/Screens/ZleceniaScreen";
 
 export default AppNavigator=()=>{
 
@@ -13,6 +14,7 @@ export default AppNavigator=()=>{
     return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen name="Zlecenia" component={ZleceniaScreen} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Customers" component={CustomersScreen} />
