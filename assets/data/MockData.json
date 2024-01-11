@@ -1,51 +1,255 @@
 {
-    "klienci": [
-      {"id": 1, "imie": "Adam", "nazwisko": "Kowalski", "email": "adam.kowalski@example.com"},
-      {"id": 2, "imie": "Alicja", "nazwisko": "Nowak", "email": "alicja.nowak@example.com"},
-      {"id": 3, "imie": "Bartosz", "nazwisko": "Lis", "email": "bartosz.lis@example.com"},
-      {"id": 4, "imie": "Cezary", "nazwisko": "Zając", "email": "cezary.zajac@example.com"},
-      {"id": 5, "imie": "Dorota", "nazwisko": "Mazurek", "email": "dorota.mazurek@example.com"},
-      {"id": 6, "imie": "Emil", "nazwisko": "Wójcik", "email": "emil.wojcik@example.com"},
-      {"id": 7, "imie": "Fiona", "nazwisko": "Kruk", "email": "fiona.kruk@example.com"},
-      {"id": 8, "imie": "Grzegorz", "nazwisko": "Szymański", "email": "grzegorz.szymanski@example.com"},
-      {"id": 9, "imie": "Halina", "nazwisko": "Lewandowska", "email": "halina.lewandowska@example.com"},
-      {"id": 10, "imie": "Igor", "nazwisko": "Jasiński", "email": "igor.jasinski@example.com"}
-    ],
-    "zlecenia_serwisowe": [
-      {"id": 101, "opis": "Naprawa laptopa", "status": "Oczekuje", "klient_id": 1},
-      {"id": 102, "opis": "Instalacja oprogramowania", "status": "W trakcie", "klient_id": 2},
-      {"id": 103, "opis": "Awaria drukarki", "status": "Zakończone", "klient_id": 3},
-      {"id": 104, "opis": "Uszkodzony router", "status": "Oczekuje", "klient_id": 4},
-      {"id": 105, "opis": "Problemy z systemem operacyjnym", "status": "W trakcie", "klient_id": 5},
-      {"id": 106, "opis": "Zainstalowanie nowego oprogramowania", "status": "Zakończone", "klient_id": 6},
-      {"id": 107, "opis": "Wymiana karty graficznej", "status": "Oczekuje", "klient_id": 7},
-      {"id": 108, "opis": "Odzyskiwanie danych", "status": "W trakcie", "klient_id": 8},
-      {"id": 109, "opis": "Konserwacja sprzętu", "status": "Zakończone", "klient_id": 9},
-      {"id": 110, "opis": "Aktualizacja systemu", "status": "Oczekuje", "klient_id": 10}
-    ],
-    "uzytkownicy": [
-      {"id": 1001, "login": "admin", "haslo": "admin123"},
-      {"id": 1002, "login": "serwisant1", "haslo": "serwisant123"},
-      {"id": 1003, "login": "uzytkownik1", "haslo": "user123"},
-      {"id": 1004, "login": "serwisant2", "haslo": "serwisant456"},
-      {"id": 1005, "login": "uzytkownik2", "haslo": "user456"},
-      {"id": 1006, "login": "serwisant3", "haslo": "serwisant789"},
-      {"id": 1007, "login": "uzytkownik3", "haslo": "user789"},
-      {"id": 1008, "login": "serwisant4", "haslo": "serwisantabc"},
-      {"id": 1009, "login": "uzytkownik4", "haslo": "userabc"},
-      {"id": 1010, "login": "serwisant5", "haslo": "serwisantxyz"}
-    ],
-    "zadania": [
-      {"id": 10001, "opis": "Sprawdzenie usterki", "status": "Do wykonania", "zlecenie_id": 101, "serwisant_id": 1002},
-      {"id": 10002, "opis": "Zainstalowanie oprogramowania", "status": "W trakcie", "zlecenie_id": 102, "serwisant_id": 1004},
-      {"id": 10003, "opis": "Czyszczenie drukarki", "status": "Zakończone", "zlecenie_id": 103, "serwisant_id": 1006},
-      {"id": 10004, "opis": "Diagnoza uszkodzonego routera", "status": "Do wykonania", "zlecenie_id": 104, "serwisant_id": 1008},
-      {"id": 10005, "opis": "Rozwiązanie problemów z systemem", "status": "W trakcie", "zlecenie_id": 105, "serwisant_id": 1010},
-      {"id": 10006, "opis": "Instalacja oprogramowania", "status": "Zakończone", "zlecenie_id": 106, "serwisant_id": 1002},
-      {"id": 10007, "opis": "Wymiana karty graficznej", "status": "Do wykonania", "zlecenie_id": 107, "serwisant_id": 1004},
-      {"id": 10008, "opis": "Odzyskiwanie danych", "status": "W trakcie", "zlecenie_id": 108, "serwisant_id": 1006},
-      {"id": 10009, "opis": "Przegląd sprzętu", "status": "Zakończone", "zlecenie_id": 109, "serwisant_id": 1008},
-      {"id": 10010, "opis": "Testowanie aktualizacji systemu", "status": "Do wykonania", "zlecenie_id": 110, "serwisant_id": 1010}
-    ]
-  }
-  
+  "klienci": [
+    {
+      "id": 1,
+      "imie": "Adam",
+      "nazwisko": "Kowalski",
+      "email": "adam.kowalski@example.com"
+    },
+    {
+      "id": 2,
+      "imie": "Alicja",
+      "nazwisko": "Nowak",
+      "email": "alicja.nowak@example.com"
+    },
+    {
+      "id": 3,
+      "imie": "Bartosz",
+      "nazwisko": "Lis",
+      "email": "bartosz.lis@example.com"
+    },
+    {
+      "id": 4,
+      "imie": "Cezary",
+      "nazwisko": "Zając",
+      "email": "cezary.zajac@example.com"
+    },
+    {
+      "id": 5,
+      "imie": "Dorota",
+      "nazwisko": "Mazurek",
+      "email": "dorota.mazurek@example.com"
+    },
+    {
+      "id": 6,
+      "imie": "Emil",
+      "nazwisko": "Wójcik",
+      "email": "emil.wojcik@example.com"
+    },
+    {
+      "id": 7,
+      "imie": "Fiona",
+      "nazwisko": "Kruk",
+      "email": "fiona.kruk@example.com"
+    },
+    {
+      "id": 8,
+      "imie": "Grzegorz",
+      "nazwisko": "Szymański",
+      "email": "grzegorz.szymanski@example.com"
+    },
+    {
+      "id": 9,
+      "imie": "Halina",
+      "nazwisko": "Lewandowska",
+      "email": "halina.lewandowska@example.com"
+    },
+    {
+      "id": 10,
+      "imie": "Igor",
+      "nazwisko": "Jasiński",
+      "email": "igor.jasinski@example.com"
+    },
+    {
+      "id": "c5f6",
+      "imie": "Kacper",
+      "nazwisko": "Skotnicki"
+    }
+  ],
+  "zlecenia_serwisowe": [
+    {
+      "id": 101,
+      "opis": "Naprawa laptopa",
+      "status": "Oczekuje",
+      "klient_id": 1
+    },
+    {
+      "id": 102,
+      "opis": "Instalacja oprogramowania",
+      "status": "W trakcie",
+      "klient_id": 2
+    },
+    {
+      "id": 103,
+      "opis": "Awaria drukarki",
+      "status": "Zakończone",
+      "klient_id": 3
+    },
+    {
+      "id": 104,
+      "opis": "Uszkodzony router",
+      "status": "Oczekuje",
+      "klient_id": 4
+    },
+    {
+      "id": 105,
+      "opis": "Problemy z systemem operacyjnym",
+      "status": "W trakcie",
+      "klient_id": 5
+    },
+    {
+      "id": 106,
+      "opis": "Zainstalowanie nowego oprogramowania",
+      "status": "Zakończone",
+      "klient_id": 6
+    },
+    {
+      "id": 107,
+      "opis": "Wymiana karty graficznej",
+      "status": "Oczekuje",
+      "klient_id": 7
+    },
+    {
+      "id": 108,
+      "opis": "Odzyskiwanie danych",
+      "status": "W trakcie",
+      "klient_id": 8
+    },
+    {
+      "id": 109,
+      "opis": "Konserwacja sprzętu",
+      "status": "Zakończone",
+      "klient_id": 9
+    },
+    {
+      "id": 110,
+      "opis": "Aktualizacja systemu",
+      "status": "Oczekuje",
+      "klient_id": 10
+    }
+  ],
+  "uzytkownicy": [
+    {
+      "id": 1001,
+      "login": "admin",
+      "haslo": "admin123"
+    },
+    {
+      "id": 1002,
+      "login": "serwisant1",
+      "haslo": "serwisant123"
+    },
+    {
+      "id": 1003,
+      "login": "uzytkownik1",
+      "haslo": "user123"
+    },
+    {
+      "id": 1004,
+      "login": "serwisant2",
+      "haslo": "serwisant456"
+    },
+    {
+      "id": 1005,
+      "login": "uzytkownik2",
+      "haslo": "user456"
+    },
+    {
+      "id": 1006,
+      "login": "serwisant3",
+      "haslo": "serwisant789"
+    },
+    {
+      "id": 1007,
+      "login": "uzytkownik3",
+      "haslo": "user789"
+    },
+    {
+      "id": 1008,
+      "login": "serwisant4",
+      "haslo": "serwisantabc"
+    },
+    {
+      "id": 1009,
+      "login": "uzytkownik4",
+      "haslo": "userabc"
+    },
+    {
+      "id": 1010,
+      "login": "serwisant5",
+      "haslo": "serwisantxyz"
+    }
+  ],
+  "zadania": [
+    {
+      "id": 10001,
+      "opis": "Sprawdzenie usterki",
+      "status": "Do wykonania",
+      "zlecenie_id": 101,
+      "serwisant_id": 1002
+    },
+    {
+      "id": 10002,
+      "opis": "Zainstalowanie oprogramowania",
+      "status": "W trakcie",
+      "zlecenie_id": 102,
+      "serwisant_id": 1004
+    },
+    {
+      "id": 10003,
+      "opis": "Czyszczenie drukarki",
+      "status": "Zakończone",
+      "zlecenie_id": 103,
+      "serwisant_id": 1006
+    },
+    {
+      "id": 10004,
+      "opis": "Diagnoza uszkodzonego routera",
+      "status": "Do wykonania",
+      "zlecenie_id": 104,
+      "serwisant_id": 1008
+    },
+    {
+      "id": 10005,
+      "opis": "Rozwiązanie problemów z systemem",
+      "status": "W trakcie",
+      "zlecenie_id": 105,
+      "serwisant_id": 1010
+    },
+    {
+      "id": 10006,
+      "opis": "Instalacja oprogramowania",
+      "status": "Zakończone",
+      "zlecenie_id": 106,
+      "serwisant_id": 1002
+    },
+    {
+      "id": 10007,
+      "opis": "Wymiana karty graficznej",
+      "status": "Do wykonania",
+      "zlecenie_id": 107,
+      "serwisant_id": 1004
+    },
+    {
+      "id": 10008,
+      "opis": "Odzyskiwanie danych",
+      "status": "W trakcie",
+      "zlecenie_id": 108,
+      "serwisant_id": 1006
+    },
+    {
+      "id": 10009,
+      "opis": "Przegląd sprzętu",
+      "status": "Zakończone",
+      "zlecenie_id": 109,
+      "serwisant_id": 1008
+    },
+    {
+      "id": 10010,
+      "opis": "Testowanie aktualizacji systemu",
+      "status": "Do wykonania",
+      "zlecenie_id": 110,
+      "serwisant_id": 1010
+    }
+  ]
+}
