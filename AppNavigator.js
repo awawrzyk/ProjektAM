@@ -6,6 +6,7 @@ import HomeScreen from './src/Screens/HomeScreen';
 import CustomersScreen from './src/Screens/CustomersScreen';
 import UsersScreen from './src/Screens/UsersScreen';
 import ZleceniaScreen from "./src/Screens/ZleceniaScreen";
+import ProductsScreen from './src/Screens/ProductsScreen';
 
 export default AppNavigator=()=>{
 
@@ -19,6 +20,7 @@ export default AppNavigator=()=>{
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Customers" component={CustomersScreen} />
                 <Stack.Screen name="Users" component={UsersScreen} />
+                <Stack.Screen name="Products" component={ProductsScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

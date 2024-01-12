@@ -15,19 +15,19 @@ export default CustomersScreen = () =>{
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(()=>{
         //Zapytanie do serwera API za pomocą biblioteki axios
-        axios.get('http://192.168.0.164:3000/klienci')
+        axios.get('http://192.168.0.37:3000/klienci')
         .then(response => setCustomers(response.data)) //Zapisanie danych do stanu
         .catch(error => console.log('Błąd pobierania danych', error)) //Obsługa wyjątku w przypadku błędu przy pobieraniu danych
     },[])
 
     // Funkcja która dodaje nowego kleitna do bazy danych
     const addCustomer = () => {
-        axios.post('http://192.168.0.164:3000/klienci', {
+        axios.post('http://192.168.0.37:3000/klienci', {
             imie: newCustomerName,
             nazwisko: newCustomerLastName
         })
         .then(response => {
-            axios.get('http://192.168.0.164:3000/klienci')
+            axios.get('http://192.168.0.37:3000/klienci')
             .then(response => setCustomers(response.data))
             .catch(error => console.log('Błąd pobierania danych', error))
         })
@@ -49,9 +49,9 @@ export default CustomersScreen = () =>{
                     data={customers} //Teraz są wrzucone dane testowe
                     renderItem={({item}) => <Text style={styles.listItem}>{item.imie} {item.nazwisko}</Text>}
                 />
-            </View>
-
-            <Modal //Modal dodawania nowego klienta
+            
+           
+            <Modal 
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
@@ -70,10 +70,11 @@ export default CustomersScreen = () =>{
                         value={newCustomerLastName}
                         onChangeText={text => setNewCustomerLastName(text)} // Zapisanie wprowadzonego nazwiska do stanu
                     />
-                    <Button title="Dodaj klienta" onPress={() => {addCustomer(); setModalVisible(false)}} /> {/* Przycisk dodający nowego klienta i zamykający modal*/}
-                    <Button title="Zamknij" onPress={() => setModalVisible(false)} /> {/* Przycisk zamykający modal*/}
+                    <Button title="Dodaj klienta" onPress={() => {addCustomer(); setModalVisible(false)}} /> 
+                    <Button title="Zamknij" onPress={() => setModalVisible(false)} /> 
                 </View>
             </Modal>
+            </View>
         </SafeAreaView>
     )
 }

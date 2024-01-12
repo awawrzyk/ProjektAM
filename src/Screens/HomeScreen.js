@@ -13,6 +13,9 @@ export default HomeScreen = ({navigation}) =>{
     const handleZlecenia=() =>{
         navigation.navigate('Zlecenia')
     }
+    const handleProducts=() =>{
+        navigation.navigate('Products')
+    }
     return(
         <SafeAreaView style={styles.container}>
             <Text>{'Home screen'}</Text>
@@ -24,6 +27,8 @@ export default HomeScreen = ({navigation}) =>{
                 <Button title="Asortyment" color='#23A403'/>
                 <View style={styles.buttonSpacing} />
                 <Button title="Użytkownicy" color='#23A403' onPress={handleUsers} />
+                <View style={styles.buttonSpacing} />
+                <Button title="Produkty" color='#23A403' onPress={handleProducts} />
             </View>
         </SafeAreaView>
     )

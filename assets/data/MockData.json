@@ -64,6 +64,11 @@
       "id": "4d7a",
       "imie": "Kacper",
       "nazwisko": "Skotnicki"
+    },
+    {
+      "id": "c477",
+      "imie": "Test",
+      "nazwisko": "Test"
     }
   ],
   "zlecenia_serwisowe": [
@@ -250,6 +255,33 @@
       "status": "Do wykonania",
       "zlecenie_id": 110,
       "serwisant_id": 1010
+    }
+  ],
+  "produkty": [
+    {
+      "id": 1,
+      "nazwa": "Koszulka",
+      "opis": "Wygodna koszulka bawełniana"
+    },
+    {
+      "id": 2,
+      "nazwa": "Buty sportowe",
+      "opis": "Lekkie buty do biegania"
+    },
+    {
+      "id": 3,
+      "nazwa": "Szkło ochronne",
+      "opis": "Szkło hartowane do telefonu"
+    },
+    {
+      "id": 4,
+      "nazwa": "Zegarek",
+      "opis": "Elegancki zegarek ze skórzanym paskiem"
+    },
+    {
+      "id": 5,
+      "nazwa": "Ołówek",
+      "opis": "Ołówek do rysowania"
     }
   ]
 }
