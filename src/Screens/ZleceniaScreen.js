@@ -12,7 +12,7 @@ export default ZleceniaScreen = () =>{
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(()=>{
         //Zapytanie do serwera API za pomocą biblioteki axios
-        axios.get('http://192.168.1.8:3000/zlecenia_serwisowe')
+        axios.get('http://1192.168.0.164:3000/zlecenia_serwisowe')
         .then(response => setZlecenia(response.data)) //Zapisanie danych do stanu
         .catch(error => console.log('Błąd pobierania danych', error)) //Obsługa wyjątku w przypadku błędu przy pobieraniu danych
     },[])

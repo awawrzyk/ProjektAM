@@ -9,18 +9,18 @@ export default UsersScreen = () => {
     const [newPassword, setNewPassword] = useState('');
 
     useEffect(() => {
-        axios.get('http://192.168.1.195:3000/uzytkownicy')
+        axios.get('http://192.168.0.164:3000/uzytkownicy')
             .then(response => setUsers(response.data))
             .catch(error => console.log('Błąd pobierania danych', error))
     }, [])
 
     const addUsers = () => {
-        axios.post('http://192.168.1.195:3000/uzytkownicy', {
+        axios.post('http://192.168.0.164:3000/uzytkownicy', {
             login: newLogin,
             haslo: newPassword
         })
             .then(response => {
-                axios.get('http://192.168.1.195:3000/uzytkownicy')
+                axios.get('http://192.168.0.164:3000/uzytkownicy')
                     .then(response => setUsers(response.data))
                     .catch(error => console.log('Błąd pobierania danych', error))
             })
