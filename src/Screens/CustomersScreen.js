@@ -93,7 +93,7 @@ const handleEditPress = (customer) => {
   setEditModalVisible(true);
 };
 
-// Komponent główny, renderujący interfejs użytkownika
+// Komponent główny, renderujący interfejs klienta
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.textHeader}>{'Klienci'}</Text>

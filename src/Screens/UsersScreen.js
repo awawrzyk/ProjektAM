@@ -1,74 +1,148 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Button, SafeAreaView, StyleSheet, View, FlatList, Modal, TextInput } from 'react-native';
+import { Text, Button, SafeAreaView, StyleSheet, View, FlatList, Modal, TextInput, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
 export default UsersScreen = () => {
-    const [users, setUsers] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [newLogin, setNewLogin] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-
+    const [users, setUsers] = useState([]);//Ustawienie stanów początkowych dla bazy uzytkownikow.
+    const [modalVisible, setModalVisible] = useState(false);//Ustawienie stanu określającego widoczność modalu
+    const [editModalVisible,setEditModalVisible] = useState(false);// Stan określający widocznosć modala edycji istniejącego użytkownika.
+    const [selectedUser, setSelectedUser] = useState(null);// Stan przechowujący informacje o aktualnie wybranym uzytkowniku( do edycji lub usuwania.)
+    //Stany przechowujące dane nowego klienta do dodania.
+    const [newUserLogin, setNewUserLogin] = useState('');
+    const [newUserPassword, setNewUserPassword] = useState('');
+ //Funkcja która pobiera dane z serwera api ip_address:port/uzytkownicy
+    //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(() => {
-        axios.get('http://192.168.0.164:3000/uzytkownicy')
+            //Zapytanie do serwera API za pomocą biblioteki axios
+        axios.get('http://192.168.1.52:3000/uzytkownicy')
+            //Zapisanie danych do stanu
             .then(response => setUsers(response.data))
+            //Obsługa wyjątku w przypadku błędu przy pobieraniu danych
             .catch(error => console.log('Błąd pobierania danych', error))
     }, [])
 
-    const addUsers = () => {
-        axios.post('http://192.168.0.164:3000/uzytkownicy', {
-            login: newLogin,
-            haslo: newPassword
+    //funkcja która dodaje nowego uzytkownika
+    const addUser = () => {
+        //wysyłanie zadania POST z nowymi danymi uzytkownika do serwera
+        axios.post('http://192.168.1.52:3000/uzytkownicy', {
+            login: newUserLogin,
+            haslo: newUserPassword
         })
             .then(response => {
-                axios.get('http://192.168.0.164:3000/uzytkownicy')
+                // Po pomyślnym dodaniu klienta, pobranie zaktualizowanej listy klientów z serwera
+                axios.get('http://192.168.1.52:3000/uzytkownicy')
                     .then(response => setUsers(response.data))
                     .catch(error => console.log('Błąd pobierania danych', error))
             })
             .catch(error => console.log('Błąd dodawania użytkownika', error));
-
-        setNewLogin('');
-        setNewPassword('');
+            
+        // Zresetowanie pól stanu nowego klienta oraz ukrycie modala dodawania klienta
+        setNewUserLogin('');
+        setNewUserPassword('');
+        setModalVisible(false);
     }
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.textHeader}>{'Użytkownicy'}</Text>
-            <View style={styles.buttonContainer}>
-                <Button title='Dodaj' color='#23A403' onPress={() => setModalVisible(true)} />
-                <View style={styles.buttonSpacing} />
-                <FlatList
-                    data={users}
-                    renderItem={({ item }) => <Text style={styles.listItem}>{item.login} {item.haslo}</Text>}
-                />
-            </View>
+ // Funkcja edytująca istniejącego uzytkownika w bazie danych
+ const editUser = () => {
+    // Wysłanie żądania PUT z zaktualizowanymi danymi klienta do serwera
+    axios.put(`http://192.168.1.52:3000/uzytkownicy/${selectedUser.id}`, {
+      Login: newUserLogin,
+      Haslo: newUserPassword
+    })
+      .then(response => {
+        // Po pomyślnej edycji klienta, pobranie zaktualizowanej listy uzytkownikow z serwera
+        axios.get('http://192.168.1.52:3000/uzytkownicy')
+          .then(response => setUsers(response.data))
+          .catch(error => console.log('Błąd pobierania danych', error))
+      })
+      .catch(error => console.log('Błąd edycji uzytkownika', error));
+    // Zresetowanie pól stanu nowego klienta oraz ukrycie modala edycji klienta
+    setNewUserLogin('');
+    setNewUserPassword('');
+    setEditModalVisible(false);
+  };
 
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-            >
-                <View style={styles.modalContainer}>
-                    <Text style={styles.textHeader}>{'Dodaj nowego użytkownika'}</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Login'
-                        value={newLogin}
-                        onChangeText={text => setNewLogin(text)}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Hasło'
-                        value={newPassword}
-                        onChangeText={text => setNewPassword(text)}
-                        secureTextEntry={true}
-                    />
-                    <Button title="Dodaj użytkownika" onPress={() => { addUsers(); setModalVisible(false) }} />
-                    <Button title="Zamknij" onPress={() => setModalVisible(false)} />
-                </View>
-            </Modal>
-        </SafeAreaView>
-    )
-}
+// Funkcja obsługująca usunięcie klienta z bazy danych
+const deleteUser = (userId) => {
+    // Wysłanie żądania DELETE do serwera, usuwając uzytkownika o określonym ID
+    axios.delete(`http://192.168.1.52:3000/uzytkownicy/${userId}`)
+      .then(response => {
+        // Po pomyślnym usunięciu klienta, pobranie zaktualizowanej listy klientów z serwera
+        axios.get('http://192.168.1.52:3000/uzytkownicy')
+          .then(response => setUsers(response.data))
+          .catch(error => console.log('Błąd pobierania danych', error))
+      })
+      .catch(error => console.log('Błąd usuwania uzytkownika', error));
+  
+    // Ukrycie modala edycji klienta po zakończeniu operacji
+    setEditModalVisible(false);
+  };
+
+  // Funkcja obsługująca naciśnięcie przycisku edycji uzytkownika
+const handleEditPress = (user) => {
+    // Ustawienie aktualnie wybranego uzytkownika oraz ustawienie danych tego uzytkownika w polach edycji
+    setSelectedUser(user);
+    setNewUserLogin(user.login);
+    setNewUserPassword(user.password);
+    setEditModalVisible(true);
+  };
+
+// Komponent główny, renderujący interfejs użytkownika
+return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.textHeader}>{'Uzytkownicy'}</Text>
+      <View style={styles.buttonContainer}>
+        <Button title='Dodaj' color='#23A403' onPress={() => setModalVisible(true)} />
+        <View style={styles.buttonSpacing} />
+        <FlatList //Lista uzytkownikow renderowana za pomocą komponentu FlatList
+          data={users}
+          renderItem={({ item }) => (
+            //Każdy elemnt listy jest klikalny i uruchamia funkcję obsługujące edycje uzytkownika.
+            <TouchableOpacity onPress={() => handleEditPress(item)}>
+              <Text style={styles.listItem}>{item.login} {item.password}</Text>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+            
+      <Modal //Modal do dodawania i edycji uzytkownikow.
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible || editModalVisible}
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.textHeader}>{editModalVisible ? 'Edytuj uzytkownika' : 'Dodaj nowego uzytkownika'}</Text> 
+          <TextInput
+            style={styles.input}
+            placeholder='Login'
+            value={newUserLogin}
+            onChangeText={text => setNewUserLogin(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Haslo'
+            value={newUserPassword}
+            onChangeText={text => setNewUserPassword(text)}
+            />
+          {editModalVisible ?
+            <>
+              <Button title="Edytuj uzytkownika" onPress={editUser} />
+              <Button title="Usuń uzytkownika" onPress={() => deleteUser(selectedUser.id)} />
+            </> :
+            <Button title="Dodaj uzytkownika" onPress={addUser} />
+          }
+          <Button title="Zamknij" onPress={() => {
+            setModalVisible(false);
+            setEditModalVisible(false);
+            setSelectedUser(null);
+            setNewUserLogin('');
+            setNewUserPassword('');
+          }} />
+        </View>
+      </Modal>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
     container: {
