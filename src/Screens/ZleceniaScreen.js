@@ -11,12 +11,13 @@ export default ZleceniaScreen = () =>{
     //Stany przechowujące dane nowego zlecenia do dodania
     const [newZlecenieName, setNewZlecenieName] = useState('');
     const [newZlecenieOpis, setNewZlecenieOpis] = useState('');
+    const [newZlecenieStatus, setNewZlecenieStatus] = useState('');
 
     //Funkcja która pobiera dane z serwera api ip_address:port/zlecenia_serwisowe
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(()=>{
         //Zapytanie do serwera API za pomocą biblioteki axios
-        axios.get('http://192.168.1.52:3000/zlecenia_serwisowe')
+        axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
         //Zapisanie danych do stanu
         .then(response => setZlecenia(response.data))
         //Obsluga wyjątku w przypadku błędu przy pobieraniu danych
@@ -26,13 +27,14 @@ export default ZleceniaScreen = () =>{
     //funcka która dodaje nowe zlecenie do bazy danych.
     const addZlecenie = () => {
         //Wysyłanie ządania POST z nowymi danymi zlecenia do serwera
-        axios.post('http://192.168.1.52:3000/zlecenia_serwisowe', {
+        axios.post('http://192.168.1.195:3000/zlecenia_serwisowe', {
           nazwa: newZlecenieName,
-          opis: newZlecenieOpis
+          opis: newZlecenieOpis,
+          status: newZlecenieStatus
         })
           .then(response => {
             // Po pomyślnym dodaniu zlecenia, pobranie zaktualizowanej listy zlecen z serwera
-            axios.get('http://192.168.1.52:3000/zlecenia_serwisowe')
+            axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
               .then(response => setZlecenia(response.data))
               .catch(error => console.log('Błąd pobierania danych', error))
           })
@@ -46,13 +48,14 @@ export default ZleceniaScreen = () =>{
         // Funkcja edytująca istniejącego zlecenia w bazie danych
 const editZlecenie = () => {
     // Wysłanie żądania PUT z zaktualizowanymi danymi zlecenia do serwera
-    axios.put(`http://192.168.1.52:3000/zlecenia_serwisowe/${selectedZlecenie.id}`, {
+    axios.put(`http://192.168.1.195:3000/zlecenia_serwisowe/${selectedZlecenie.id}`, {
       nazwa: newZlecenieName,
-      opis: newZlecenieOpis
+      opis: newZlecenieOpis,
+      status: newZlecenieStatus
     })
       .then(response => {
         // Po pomyślnej edycji zlecenia, pobranie zaktualizowanej listy zlecen z serwera
-        axios.get('http://192.168.1.52:3000/zlecenia_serwisowe')
+        axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
           .then(response => setZlecenia(response.data))
           .catch(error => console.log('Błąd pobierania danych', error))
       })
@@ -61,10 +64,29 @@ const editZlecenie = () => {
     // Zresetowanie pól stanu nowego zlecenia oraz ukrycie modala edycji zlecenia
     setNewZlecenieName('');
     setNewZlecenieOpis('');
+    setNewZlecenieStatus('');
     setEditModalVisible(false);
   };
   
   //Usuwanie
+
+// Funkcja obsługująca usunięcie zlecenia z bazy danych
+const deleteZlecenie = (zleceniaId) => {
+  // Wysłanie żądania DELETE do serwera, usuwając zlecenie o określonym ID
+  axios.delete(`http://192.168.1.195:3000/zlecenia_serwisowe/${zleceniaId}`)
+    .then(response => {
+      // Po pomyślnym usunięciu zlecenia, pobranie zaktualizowanej listy zleceń z serwera
+      axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
+        .then(response => setZlecenia(response.data))
+        .catch(error => console.log('Błąd pobierania danych', error))
+    })
+    .catch(error => console.log('Błąd usuwania zlecenia', error));
+
+  // Ukrycie modala edycji klienta po zakończeniu operacji
+  setEditModalVisible(false);
+};
+
+
 
 // Funkcja obsługująca naciśnięcie przycisku edycji zlecenia
 const handleEditPress = (zlecenie) => {
@@ -72,6 +94,7 @@ const handleEditPress = (zlecenie) => {
     setSelectedZlecenie(zlecenie);
     setNewZlecenieName(zlecenie.nazwa);
     setNewZlecenieOpis(zlecenie.opis);
+    setNewZlecenieStatus(zlecenie.status);
     setEditModalVisible(true);
   };
  
@@ -88,7 +111,7 @@ const handleEditPress = (zlecenie) => {
           renderItem={({ item }) => (
             //Każdy elemnt listy jest klikalny i uruchamia funkcję obsługujące edycje zlecenia.
             <TouchableOpacity onPress={() => handleEditPress(item)}>
-              <Text style={styles.listItem}>{item.nazwa} {item.opis}</Text>
+              <Text style={styles.listItem}>{item.nazwa} - {item.status} </Text>
             </TouchableOpacity>
           )}
         />
@@ -113,6 +136,13 @@ const handleEditPress = (zlecenie) => {
             value={newZlecenieOpis}
             onChangeText={text => setNewZlecenieOpis(text)}
           />
+          <TextInput
+            style={styles.input}
+            placeholder='Status'
+            value={newZlecenieStatus}
+            onChangeText={text => setNewZlecenieStatus(text)}
+          />
+
           {editModalVisible ?
             <>
               <Button title="Edytuj zlecenie" onPress={editZlecenie} />
@@ -126,6 +156,7 @@ const handleEditPress = (zlecenie) => {
             setSelectedZlecenie(null);
             setNewZlecenieName('');
             setNewZlecenieOpis('');
+            setNewZlecenieStatus('');
           }} />
         </View>
       </Modal>
