@@ -17,7 +17,7 @@ export default ZleceniaScreen = () =>{
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(()=>{
         //Zapytanie do serwera API za pomocą biblioteki axios
-        axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
+        axios.get('http://192.168.1.8:3000/zlecenia_serwisowe')
         //Zapisanie danych do stanu
         .then(response => setZlecenia(response.data))
         //Obsluga wyjątku w przypadku błędu przy pobieraniu danych
@@ -27,14 +27,14 @@ export default ZleceniaScreen = () =>{
     //funcka która dodaje nowe zlecenie do bazy danych.
     const addZlecenie = () => {
         //Wysyłanie ządania POST z nowymi danymi zlecenia do serwera
-        axios.post('http://192.168.1.195:3000/zlecenia_serwisowe', {
+        axios.post('http://192.168.1.8:3000/zlecenia_serwisowe', {
           nazwa: newZlecenieName,
           opis: newZlecenieOpis,
           status: newZlecenieStatus
         })
           .then(response => {
             // Po pomyślnym dodaniu zlecenia, pobranie zaktualizowanej listy zlecen z serwera
-            axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
+            axios.get('http://192.168.1.8:3000/zlecenia_serwisowe')
               .then(response => setZlecenia(response.data))
               .catch(error => console.log('Błąd pobierania danych', error))
           })
@@ -48,14 +48,14 @@ export default ZleceniaScreen = () =>{
         // Funkcja edytująca istniejącego zlecenia w bazie danych
 const editZlecenie = () => {
     // Wysłanie żądania PUT z zaktualizowanymi danymi zlecenia do serwera
-    axios.put(`http://192.168.1.195:3000/zlecenia_serwisowe/${selectedZlecenie.id}`, {
+    axios.put(`http://192.168.1.8:3000/zlecenia_serwisowe/${selectedZlecenie.id}`, {
       nazwa: newZlecenieName,
       opis: newZlecenieOpis,
       status: newZlecenieStatus
     })
       .then(response => {
         // Po pomyślnej edycji zlecenia, pobranie zaktualizowanej listy zlecen z serwera
-        axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
+        axios.get('http://192.168.1.8:3000/zlecenia_serwisowe')
           .then(response => setZlecenia(response.data))
           .catch(error => console.log('Błąd pobierania danych', error))
       })
@@ -73,10 +73,10 @@ const editZlecenie = () => {
 // Funkcja obsługująca usunięcie zlecenia z bazy danych
 const deleteZlecenie = (zleceniaId) => {
   // Wysłanie żądania DELETE do serwera, usuwając zlecenie o określonym ID
-  axios.delete(`http://192.168.1.195:3000/zlecenia_serwisowe/${zleceniaId}`)
+  axios.delete(`http://192.168.1.8:3000/zlecenia_serwisowe/${zleceniaId}`)
     .then(response => {
       // Po pomyślnym usunięciu zlecenia, pobranie zaktualizowanej listy zleceń z serwera
-      axios.get('http://192.168.1.195:3000/zlecenia_serwisowe')
+      axios.get('http://192.168.1.8:3000/zlecenia_serwisowe')
         .then(response => setZlecenia(response.data))
         .catch(error => console.log('Błąd pobierania danych', error))
     })

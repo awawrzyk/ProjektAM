@@ -24,8 +24,6 @@ export default HomeScreen = ({navigation}) =>{
                 <View style={styles.buttonSpacing} />
                 <Button title="Klienci" color='#23A403' onPress={handleCustomers}/>
                 <View style={styles.buttonSpacing} />
-                <Button title="Asortyment" color='#23A403'/>
-                <View style={styles.buttonSpacing} />
                 <Button title="Użytkownicy" color='#23A403' onPress={handleUsers} />
                 <View style={styles.buttonSpacing} />
                 <Button title="Produkty" color='#23A403' onPress={handleProducts} />

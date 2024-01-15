@@ -17,7 +17,7 @@ export default ProductsScreen = () => {
 
     // Funkcja, która pobiera dane z serwera API (adres IP: 192.168.0.164, port: 3000, endpoint: /produkty)
     useEffect(() => {
-        axios.get('http://192.168.0.164:3000/produkty')  // Zmiana adresu IP na 192.168.0.164
+        axios.get('http://192.168.1.8:3000/produkty')  // Zmiana adresu IP na 192.168.0.164
             .then(response => setProducts(response.data))
             .catch(error => console.log('Błąd pobierania danych', error))
     }, []);
@@ -29,7 +29,7 @@ export default ProductsScreen = () => {
             opis: newProductDescription,
         };
 
-        axios.post('http://192.168.0.164:3000/produkty', newProduct)  // Zmiana adresu IP na 192.168.0.164
+        axios.post('http://192.168.1.8:3000/produkty', newProduct)  // Zmiana adresu IP na 192.168.0.164
             .then(response => {
                 setProducts([...products, response.data]);
                 setModalVisible(false);
@@ -41,7 +41,7 @@ export default ProductsScreen = () => {
 
     // Funkcja usuwająca produkt z bazy danych.
     const deleteProduct = (productId) => {
-        axios.delete(`http://192.168.0.164:3000/produkty/${productId}`)  // Zmiana adresu IP na 192.168.0.164
+        axios.delete(`http://192.168.1.8:3000/produkty/${productId}`)  // Zmiana adresu IP na 192.168.0.164
             .then(() => {
                 setProducts(products.filter(product => product.id !== productId));
                 setModalVisible(false);
@@ -57,7 +57,7 @@ export default ProductsScreen = () => {
             opis: newProductDescription,
         };
 
-        axios.put(`http://192.168.0.164:3000/produkty/${selectedProduct.id}`, updatedProduct)  // Zmiana adresu IP na 192.168.0.164
+        axios.put(`http://192.168.1.8:3000/produkty/${selectedProduct.id}`, updatedProduct)  // Zmiana adresu IP na 192.168.0.164
             .then(() => {
                 const updatedProducts = products.map(product => (product.id === selectedProduct.id ? updatedProduct : product));
                 setProducts(updatedProducts);

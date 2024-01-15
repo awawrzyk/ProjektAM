@@ -43,8 +43,77 @@
       "email": "Bartek.smelcerz@gmail.com"
     }
   ],
-  "zlecenia_serwisowe": [],
-  "uzytkownicy": [],
+  "zlecenia_serwisowe": [
+    {
+      "id": "2560",
+      "nazwa": "Naprawa laptopa",
+      "opis": "Wymiana uszkodzonego dysku ",
+      "status": "Oczekuje"
+    },
+    {
+      "id": "bdc4",
+      "nazwa": "Instalacja  oprogramowania ",
+      "opis": "Aktualizacja sterowników",
+      "status": "W trakcie"
+    },
+    {
+      "id": "9be6",
+      "nazwa": "Naprawa drukarki",
+      "opis": "Wymiana uszkodzonego zasilacza",
+      "status": "Zakończone "
+    },
+    {
+      "id": "d960",
+      "nazwa": "Naprawa routera",
+      "opis": "Wymiana uszkodzonych anten",
+      "status": "Oczekuje"
+    },
+    {
+      "nazwa": "Naprawa komputera",
+      "opis": "Zainstalowanie nowego oprogramowania",
+      "status": "Zakończone ",
+      "id": "01ad"
+    },
+    {
+      "nazwa": "Naprawa komputera",
+      "opis": "Wymiana karty graficznej",
+      "status": "Zakończone ",
+      "id": "4c99"
+    },
+    {
+      "id": "f8d1",
+      "nazwa": "Odzyskiwanie danych",
+      "opis": "Naprawa uszkodzonego dysku",
+      "status": "Oczekuje"
+    }
+  ],
+  "uzytkownicy": [
+    {
+      "id": "20a8",
+      "login": "Admin",
+      "haslo": "12345"
+    },
+    {
+      "id": "fee6",
+      "login": "Serwisant",
+      "haslo": "9876"
+    },
+    {
+      "id": "9da3",
+      "login": "Uzytkownik",
+      "haslo": "5665"
+    },
+    {
+      "id": "ef64",
+      "login": "Admin 2",
+      "haslo": "Admin"
+    },
+    {
+      "id": "bb7f",
+      "login": "Uzytkownik 2",
+      "haslo": "65412"
+    }
+  ],
   "produkty": [
     {
       "id": "601f",

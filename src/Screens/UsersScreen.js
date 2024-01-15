@@ -14,7 +14,7 @@ export default UsersScreen = () => {
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
     useEffect(() => {
             //Zapytanie do serwera API za pomocą biblioteki axios
-        axios.get('http://192.168.1.52:3000/uzytkownicy')
+        axios.get('http://192.168.1.8:3000/uzytkownicy')
             //Zapisanie danych do stanu
             .then(response => setUsers(response.data))
             //Obsługa wyjątku w przypadku błędu przy pobieraniu danych
@@ -24,13 +24,13 @@ export default UsersScreen = () => {
     //funkcja która dodaje nowego uzytkownika
     const addUser = () => {
         //wysyłanie zadania POST z nowymi danymi uzytkownika do serwera
-        axios.post('http://192.168.1.52:3000/uzytkownicy', {
+        axios.post('http://192.168.1.8:3000/uzytkownicy', {
             login: newUserLogin,
             haslo: newUserPassword
         })
             .then(response => {
                 // Po pomyślnym dodaniu klienta, pobranie zaktualizowanej listy klientów z serwera
-                axios.get('http://192.168.1.52:3000/uzytkownicy')
+                axios.get('http://192.168.1.8:3000/uzytkownicy')
                     .then(response => setUsers(response.data))
                     .catch(error => console.log('Błąd pobierania danych', error))
             })
@@ -45,13 +45,13 @@ export default UsersScreen = () => {
  // Funkcja edytująca istniejącego uzytkownika w bazie danych
  const editUser = () => {
     // Wysłanie żądania PUT z zaktualizowanymi danymi klienta do serwera
-    axios.put(`http://192.168.1.52:3000/uzytkownicy/${selectedUser.id}`, {
+    axios.put(`http://192.168.1.8:3000/uzytkownicy/${selectedUser.id}`, {
       Login: newUserLogin,
       Haslo: newUserPassword
     })
       .then(response => {
         // Po pomyślnej edycji klienta, pobranie zaktualizowanej listy uzytkownikow z serwera
-        axios.get('http://192.168.1.52:3000/uzytkownicy')
+        axios.get('http://192.168.1.8:3000/uzytkownicy')
           .then(response => setUsers(response.data))
           .catch(error => console.log('Błąd pobierania danych', error))
       })
@@ -65,10 +65,10 @@ export default UsersScreen = () => {
 // Funkcja obsługująca usunięcie klienta z bazy danych
 const deleteUser = (userId) => {
     // Wysłanie żądania DELETE do serwera, usuwając uzytkownika o określonym ID
-    axios.delete(`http://192.168.1.52:3000/uzytkownicy/${userId}`)
+    axios.delete(`http://192.168.1.8:3000/uzytkownicy/${userId}`)
       .then(response => {
         // Po pomyślnym usunięciu klienta, pobranie zaktualizowanej listy klientów z serwera
-        axios.get('http://192.168.1.52:3000/uzytkownicy')
+        axios.get('http://192.168.1.8:3000/uzytkownicy')
           .then(response => setUsers(response.data))
           .catch(error => console.log('Błąd pobierania danych', error))
       })

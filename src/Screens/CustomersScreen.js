@@ -15,7 +15,7 @@ export default CustomersScreen = () => {
     //Testy zostały przeprowadzone na adresie 127.0.0.1 (localhost) oraz porcie 3000
   useEffect(() => {
     //Zapytanie do serwera API za pomocą biblioteki axios
-    axios.get('http://192.168.206.48:3000/klienci')
+    axios.get('http://192.168.1.8:3000/klienci')
     //Zapisanie danych do stanu
       .then(response => setCustomers(response.data))
       //Obsługa wyjątku w przypadku błędu przy pobieraniu danych
@@ -25,14 +25,14 @@ export default CustomersScreen = () => {
   //funkcja która dodaje nowego klienta do bazy danych.
   const addCustomer = () => {
     //Wysyłanie ządania POST z nowymi danymi klienta do serwera
-    axios.post('http://192.168.206.48:3000/klienci', {
+    axios.post('http://192.168.1.8:3000/klienci', {
       imie: newCustomerName,
       nazwisko: newCustomerLastName,
       email: newCustomerEmail
     })
       .then(response => {
         // Po pomyślnym dodaniu klienta, pobranie zaktualizowanej listy klientów z serwera
-        axios.get('http://192.168.206.48:3000/klienci')
+        axios.get('http://192.168.1.8:3000/klienci')
           .then(response => setCustomers(response.data))
           .catch(error => console.log('Błąd pobierania danych', error))
       })
@@ -47,14 +47,14 @@ export default CustomersScreen = () => {
   // Funkcja edytująca istniejącego klienta w bazie danych
 const editCustomer = () => {
   // Wysłanie żądania PUT z zaktualizowanymi danymi klienta do serwera
-  axios.put(`http://192.168.206.48:3000/klienci/${selectedCustomer.id}`, {
+  axios.put(`http://192.168.1.8:3000/klienci/${selectedCustomer.id}`, {
     imie: newCustomerName,
     nazwisko: newCustomerLastName,
     email: newCustomerEmail
   })
     .then(response => {
       // Po pomyślnej edycji klienta, pobranie zaktualizowanej listy klientów z serwera
-      axios.get('http://192.168.206.48:3000/klienci')
+      axios.get('http://192.168.1.8:3000/klienci')
         .then(response => setCustomers(response.data))
         .catch(error => console.log('Błąd pobierania danych', error))
     })
@@ -70,10 +70,10 @@ const editCustomer = () => {
 // Funkcja obsługująca usunięcie klienta z bazy danych
 const deleteCustomer = (customerId) => {
   // Wysłanie żądania DELETE do serwera, usuwając klienta o określonym ID
-  axios.delete(`http://192.168.206.48:3000/klienci/${customerId}`)
+  axios.delete(`http://192.168.1.8:3000/klienci/${customerId}`)
     .then(response => {
       // Po pomyślnym usunięciu klienta, pobranie zaktualizowanej listy klientów z serwera
-      axios.get('http://192.168.206.48:3000/klienci')
+      axios.get('http://192.168.1.8:3000/klienci')
         .then(response => setCustomers(response.data))
         .catch(error => console.log('Błąd pobierania danych', error))
     })
